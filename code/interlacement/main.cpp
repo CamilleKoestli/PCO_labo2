@@ -29,7 +29,7 @@ void signalHandler(int)
 void run(int tid)
 {
     while(programRunning) {
-        std::cout << "Hello from thread " << tid << std::endl;
+        // TODO
     }
 }
 
