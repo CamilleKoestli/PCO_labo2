@@ -31,4 +31,8 @@ set(FORMS
 
 add_executable(PCO_lab01_counter ${SOURCES} ${HEADERS} ${FORMS})
 
-target_link_libraries(PCO_lab01_counter PRIVATE Qt::Core Qt::Gui Qt::Widgets -lpcosynchro)
+if (Qt5_FOUND)
+    target_link_libraries(PCO_lab01_counter PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets -lpcosynchro)
+else ()
+    target_link_libraries(PCO_lab01_counter PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets -lpcosynchro)
+endif()
