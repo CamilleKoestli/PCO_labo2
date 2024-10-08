@@ -25,4 +25,18 @@
  */
 void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */);
 
+/** 
+ * @brief startSorting Fonction qui démarre le tri d'une séquence avec l'algorithme Bogosort déterministe
+ * @param seq séquence à trier
+ * @param nbThreads nombre de threads à utiliser
+ */
+std::vector<int> ThreadManager::startSorting(std::vector<int> seq, unsigned int nbThreads);
+
+/**
+ * @brief isSorted Fonction qui vérifie si une séquence est triée
+ * @param seq séquence à vérifier
+ * @return vrai si la séquence est triée, faux sinon
+ */
+bool isSorted(const std::vector<int>& seq);
+
 #endif // MYTHREAD_H
