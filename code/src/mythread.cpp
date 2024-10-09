@@ -5,12 +5,16 @@
 void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */)
 {
 
-    // Vérification si la séquence est triée
-    if (isSorted(seq)){
-        pManager->requestStop();
-        return;
-    }
+    while(!pManager->finished){
+        // Génération d'une séquence aléatoire
+        std::random_shuffle(seq.begin(), seq.end());
 
+        // Vérification si la séquence est triée
+        if (std::is_sorted(seq.begin(), seq.end())){
+            pManager->finished = true;
+            return;
+        }
+    }
     // Exemple de mise à jour de la barre de progression
     pManager->incrementPercentComputed((double)1);
 }
@@ -18,9 +22,7 @@ void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */)
 
 std::vector<int> ThreadManager::startSorting(std::vector<int> seq, unsigned int nbThreads){
     // TODO
+    
+    
     return seq;
-}
-
-bool isSorted(const std::vector<int>& seq) {
-    return std::is_sorted(seq.begin(), seq.end());
 }

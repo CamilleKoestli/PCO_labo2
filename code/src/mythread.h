@@ -32,11 +32,4 @@ void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */);
  */
 std::vector<int> ThreadManager::startSorting(std::vector<int> seq, unsigned int nbThreads);
 
-/**
- * @brief isSorted Fonction qui vérifie si une séquence est triée
- * @param seq séquence à vérifier
- * @return vrai si la séquence est triée, faux sinon
- */
-bool isSorted(const std::vector<int>& seq);
-
 #endif // MYTHREAD_H
