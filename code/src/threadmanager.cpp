@@ -29,6 +29,29 @@ std::vector<int> ThreadManager::startSorting(
     // TODO lancement des threads avec la fonction Bogosort
     // TODO arrêt des threads et récupération du tableau trié
     // TODO retourner le tableau trié
+
+    QVector<PcoThread*> threads;
+    QVector<std::vector<int>> results(nbThreads);
+
+    auto sortingTask = [this](std::vector<int> subseq, unsigned int threadIndex) {
+        bogosort(subseq, this);
+        if (this->finished) return;  
+        this->finished = true; 
+    };
+
+    // Lancement des threads
+    for (unsigned int i = 0; i < nbThreads; i++){
+        PcoThread* thread = new PcoThread(sortingTask, seq, i);
+        threads.push_back(thread);
+    }
+
+    // Arrêt de tous les threads
+    for (PcoThread* thread : threads) {
+        thread->join(); 
+        delete thread; 
+    }
+
+    return seq; 
 }
 
 

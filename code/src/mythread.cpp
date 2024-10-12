@@ -4,8 +4,8 @@
 
 void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */)
 {
-
-    while(!pManager->finished){
+    // TODO
+   while(!pManager->finished){
         // Génération d'une séquence aléatoire
         std::random_shuffle(seq.begin(), seq.end());
 
@@ -15,14 +15,7 @@ void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */)
             return;
         }
     }
+
     // Exemple de mise à jour de la barre de progression
     pManager->incrementPercentComputed((double)1);
-}
-
-
-std::vector<int> ThreadManager::startSorting(std::vector<int> seq, unsigned int nbThreads){
-    // TODO
-    
-    
-    return seq;
 }
