@@ -2,20 +2,21 @@
 #include "mythread.h"
 #include <iostream>
 
-void bogosort(std::vector<int> seq, ThreadManager *pManager /* TODO */)
+void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq)
 {
-
-    // TODO
-    while (!pManager->finished)
+    for (unsigned i = startIdx; i <= endIdx; ++i)
     {
-        // Génération d'une séquence aléatoire
-        std::random_shuffle(seq.begin(), seq.end());
-
-        // Vérification si la séquence est triée
-        if (std::is_sorted(seq.begin(), seq.end()))
+        std::vector<int> perm = getPermutation(seq, i);
+        if (std::is_sorted(perm.begin(), perm.end()))
         {
             pManager->finished = true;
-            return;
+            *sortedSeq = perm;
+            break;
+        }
+
+        if (pManager->finished)
+        {
+            break;
         }
     }
 

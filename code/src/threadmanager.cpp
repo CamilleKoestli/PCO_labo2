@@ -1,6 +1,7 @@
 
 #include <QRandomGenerator>
 #include <iostream>
+#include <cmath>
 
 #include "threadmanager.h"
 #include "mythread.h"
@@ -30,19 +31,22 @@ std::vector<int> ThreadManager::startSorting(
     // TODO arrêt des threads et récupération du tableau trié
     // TODO retourner le tableau trié
 
-    QVector<PcoThread*> threads;
-    QVector<std::vector<int>> results(nbThreads);
+    std::vector<int> seqSorting;
 
-    auto sortingTask = [this](std::vector<int> subseq, unsigned int threadIndex) {
-        bogosort(subseq, this);
-        if (this->finished) return;  
-        this->finished = true; 
-    };
+    std::vector<PcoThread*> threads;
+    //QVector<std::vector<int>> results(nbThreads);
+    
+    unsigned totalPerm = factorial(seq.size());
+    
+    unsigned permsPerThread = ceil((double)totalPerm / (double)nbThreads);
+    
 
     // Lancement des threads
     for (unsigned int i = 0; i < nbThreads; i++){
-        PcoThread* thread = new PcoThread(sortingTask, seq, i);
+        PcoThread* thread = new PcoThread(bogosort, seq, this, i * permsPerThread, (i + 1) * permsPerThread - 1, &seqSorting);
         threads.push_back(thread);
+        
+        //TODO last thread
     }
 
     // Arrêt de tous les threads
@@ -51,7 +55,7 @@ std::vector<int> ThreadManager::startSorting(
         delete thread; 
     }
 
-    return seq; 
+    return seqSorting; 
 }
 
 
