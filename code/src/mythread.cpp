@@ -29,12 +29,24 @@ std::vector<int> getPermutation(std::vector<int> list, int k)
     std::vector<int> permutation;
     std::vector<int> availableElements = permutation;
 
-    for (size_t i = 0; i < n; i++){
+    for (size_t i = 0; i < n; i++)
+    {
         int fact = factorial(n - 1 - i);
         int index = k / fact;
         permutation.push_back(availableElements[index]);
         availableElements.erase(availableElements.begin() + index);
         k = k % fact;
     }
+
     return permutation;
+}
+
+int factorial(int n)
+{
+    int result = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        result *= i;
+    }
+    return result;
 }

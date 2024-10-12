@@ -25,4 +25,19 @@
  */
 void bogosort(std::vector<int> seq, ThreadManager* pManager /* TODO */);
 
+/**
+ * @brief getPermutation Retourne la k-ième permutation d'une liste
+ * @param list liste d'entiers
+ * @param k index de la permutation
+ * @return k-ième permutation
+ */
+std::vector<int> getPermutation(std::vector<int> list, int k);
+
+/**
+ * @brief factorial Calcule la factorielle d'un entier
+ * @param n entier
+ * @return factorielle de n
+ */
+int factorial(int n);
+
 #endif // MYTHREAD_H
