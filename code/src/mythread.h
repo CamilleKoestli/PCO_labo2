@@ -17,11 +17,14 @@
 
 #include "threadmanager.h"
 
-//TODO explain parametres
+
 /**
  * @brief bogosort Trie une séquence avec l'algorithme Bogosort déterministe en parallèle
  * @param seq séquence à trier
  * @param pManager Pointeur sur le ThreadManager utilisé pour accéder à l'interface
+ * @param startIdx index de début de la séquence à trier
+ * @param endIdx index de fin de la séquence à trier
+ * @param sortedSeq séquence triée
  */
 void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq);
 

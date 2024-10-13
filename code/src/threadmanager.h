@@ -40,6 +40,7 @@ public:
      * @brief startSorting tâche qui s'occupe de générer la séquence à trier et de
      * démarrer le tri.
      * @param seq séquence à trier
+     * @param nbThreads le nombre de threads à lancer
      * @return séquence triée
      */
     std::vector<int> startSorting(

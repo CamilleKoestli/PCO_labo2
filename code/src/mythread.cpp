@@ -2,12 +2,24 @@
 #include "mythread.h"
 #include <iostream>
 
+/**
+ * @brief bogosort Trie une séquence avec l'algorithme Bogosort déterministe en parallèle
+ * @param seq séquence à trier
+ * @param pManager Pointeur sur le ThreadManager utilisé pour accéder à l'interface
+ * @param startIdx index de début de la séquence à trier
+ * @param endIdx index de fin de la séquence à trier
+ * @param sortedSeq séquence triée
+ */
 void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq)
 {
+    // Nombre total de permutations à traiter pour le thread
     unsigned totalWork = endIdx - startIdx + 1;
+
     for (unsigned i = startIdx; i <= endIdx; ++i)
     {
         std::vector<int> perm = getPermutation(seq, i);
+
+        // Si c'est trié, mettre à jour la séquence et terminé
         if (std::is_sorted(perm.begin(), perm.end()))
         {
             pManager->finished = true;
@@ -15,11 +27,12 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
             break;
         }
 
+        // Vérifie si un autre thread a terminé
         if (pManager->finished)
         {
             break;
         }
-
+        // Mise à jour de la progression
         double progress = 100.0 * (i - startIdx + 1) / totalWork; 
         pManager->incrementPercentComputed(progress);
     }
@@ -29,12 +42,19 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
 }
 
 
+/**
+ * @brief getPermutation Retourne la k-ième permutation d'une liste
+ * @param list liste d'entiers
+ * @param k index de la permutation
+ * @return k-ième permutation
+ */
 std::vector<int> getPermutation(std::vector<int> list, int k)
 {
     size_t n = list.size();
     std::vector<int> permutation;
     std::vector<int> availableElements = list;
 
+    // Vérification si l'indice k est hors des plages
     if (k >= factorial(n)) {
         throw std::out_of_range("k est out of range");
     }
@@ -51,6 +71,12 @@ std::vector<int> getPermutation(std::vector<int> list, int k)
     return permutation;
 }
 
+
+/**
+ * @brief factorial Calcule la factorielle d'un entier
+ * @param n entier
+ * @return factorielle de n
+ */
 int factorial(int n)
 {
     int result = 1;

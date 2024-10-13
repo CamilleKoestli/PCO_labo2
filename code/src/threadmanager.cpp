@@ -31,8 +31,10 @@ std::vector<int> ThreadManager::startSorting(
     // TODO arrêt des threads et récupération du tableau trié
     // TODO retourner le tableau trié
 
+    // Création du résultat du vecteur trié
     std::vector<int> seqSorting;
 
+    // Liste de tous les threads
     std::vector<PcoThread*> threads;
 
     // Calcul du nombre total de permutations    
@@ -50,12 +52,10 @@ std::vector<int> ThreadManager::startSorting(
         
         // Si c'est le dernier thread, il prend les permutations restantes
         if (i == nbThreads - 1) {
-            endIdx = totalPerm - 1;  // Assigner les dernières permutations
+            endIdx = totalPerm - 1;
         }
         PcoThread* thread = new PcoThread(bogosort, seq, this, startIdx, endIdx, &seqSorting);
         threads.push_back(thread);
-        
-        //TODO last thread
     }
 
     // Arrêt de tous les threads
