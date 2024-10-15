@@ -12,9 +12,6 @@
  */
 void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq)
 {
-    // Nombre total de permutations à traiter pour le thread
-    unsigned totalWork = endIdx - startIdx + 1;
-
     for (unsigned i = startIdx; i <= endIdx; ++i)
     {
         std::vector<int> perm = getPermutation(seq, i);
@@ -33,8 +30,7 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
             break;
         }
         // Mise à jour de la progression
-        double progress = 100.0 * (i - startIdx + 1) / totalWork; 
-        pManager->incrementPercentComputed(progress);
+        pManager->incrementPercentComputed(double(100.0 / (endIdx - startIdx + 1)));
     }
 
     // Exemple de mise à jour de la barre de progression
