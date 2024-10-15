@@ -31,18 +31,38 @@ L'algorithme est implémenté dans la fonction `bogosort`. La fonction va devoir
   - Si non, continuer à traiter les permutations suivantes dans son intervalle.
 
 ## Tests effectués
-**Test avec une séquence de 3 éléments et un thread**
-- Description : Une séquence de 3 éléments si le tri fonctionne correctement avec un petit ensemble de permutations et un seul thread.
-- Résultat : OK
+**Test avec 3 éléments générés aléatoirement et 1 thread**
 
-**Test avec une séquence de 6 éléments et 9 threads**
-- Description : Une séquence de 6 éléments si le tri fonctionne correctement avec un plus grand ensemble de permutations et plusieurs threads.
-- Résultat : OK
+- Description : Utilisation d'une séquence de 3 éléments générée aléatoirement, ce qui donne un total de 3! = 6 permutations possibles. Un seul thread est utilisé.
+- Objectif : Tester le bon fonctionnement de l'algorithme avec une séquence simple et un seul thread, pour valider l'exécution séquentielle du tri Bogosort.
+- Résultat : OK. Le thread a exploré toutes les permutations et a trouvé la permutation triée, terminant le travail correctement.
 
-**Test avec une séquence de 15 éléments et 1000 threads**
-- Description : Une séquence de 15 éléments si le tri fonctionne correctement avec un plus grand ensemble de permutations et plusieurs threads.
-- Résultat : OK
+**Test avec 6 éléments générés aléatoirement et 9 threads**
 
-**Test avec une séquence de 15 éléments et 999 threads**
-- Description : Une séquence de 15 éléments si le tri fonctionne correctement avec un plus grand ensemble de permutations et plusieurs threads.
-- Résultat : OK
+- Description : Utilisation d'une de 6 éléments est créé aléatoirement, donc 6! = 720 permutations. On utilise 9 threads, chaque thread traite 80 permutations.
+- Objectif : Tester le bon fonctionnement du programme avec une séquence un peu plus complexe.
+- Résultat : OK.
+
+**Test avec 10 éléments générés aléatoirement 800 threads**
+
+- Description : Utilisation d'une séquence de 10 éléments générée aléatoirement, ce qui donne un total de 10! = 3'628'800 permutations possibles. 800 threads ont été utilisés pour traiter les permutations. Chaque thread traite 4'536 permutations.
+- Objectif : Tester la capacité du programme à gérer une grande quantité de permutations avec beaucoup de threads. Ici, chaque thread a été assigné un grand nombre de permutations à traiter.
+- Résultat : OK.
+
+**Test avec 10 éléments générés aléatoirement et 4 threads**
+
+- Description : Utilisation d'une séquence de 10 éléments générée aléatoirement, ce qui donne un total de 10! = 3'628'800 permutations possibles en utilisant 4 threads. Chaque thread traite 907'200 permutations.
+- Objectif : Tester que le programme peut s'occuper de beaucoup de séquences avec peu de threads et que la répartition du travail est correcte.
+- Résultat : OK.
+
+**Test avec 3 éléments générés aléatoirement et 10 threads**
+
+- Description : Utilisation d'une séquence de 3 éléments générée aléatoirement, ce qui donne un total de 3! = 6 permutations, avec 10 threads initialisés. Il y a moins de permutations que de threads, certains threads n'ont pas été démarrés.
+- Objectif : Tester le programme lorsqu'il y a plus de threads que de permutations.
+- Résultat : OK.
+
+**Test avec 7 éléments générés aléatoirement et 13 threads (total non divisible)**
+
+- Description : Utilisation d'une séquence de 7 éléments générée aléatoirement, ce qui donne un total de 7! = 5040 permutations en utilisant 13 threads. Ici, le nombre total de permutations n'est pas divisible par le nombre de threads. Chaque thread traite environ 387 permutations.Certaines threads recevront plus de permutations que d'autres.
+- Objectif : Tester la répartition inégale des permutations.
+- Résultat : OK.
