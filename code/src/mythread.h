@@ -25,8 +25,9 @@
  * @param startIdx index de début de la séquence à trier
  * @param endIdx index de fin de la séquence à trier
  * @param sortedSeq séquence triée
+ * @param totalPerm nombre total de permutations
  */
-void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq);
+void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq, unsigned totalPerm);
 
 /**
  * @brief getPermutation Retourne la k-ième permutation d'une liste

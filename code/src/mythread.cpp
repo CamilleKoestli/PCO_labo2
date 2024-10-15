@@ -10,7 +10,7 @@
  * @param endIdx index de fin de la séquence à trier
  * @param sortedSeq séquence triée
  */
-void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq)
+void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq, unsigned totalPerm)
 {
     for (unsigned i = startIdx; i <= endIdx; ++i)
     {
@@ -30,7 +30,7 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
             break;
         }
         // Mise à jour de la progression
-        pManager->incrementPercentComputed(double(100.0 / (endIdx - startIdx + 1)));
+        pManager->incrementPercentComputed(1.0 / totalPerm);
     }
 
     // Exemple de mise à jour de la barre de progression

@@ -43,9 +43,6 @@ std::vector<int> ThreadManager::startSorting(
     // Calcul le nombre de permutations par thread
     unsigned permsPerThread = floor((double)totalPerm / (double)nbThreads);
     
-    // Calcul du nombre de permutations restantes
-    //unsigned remainingPerms = totalPerm % nbThreads;
-    
 
     // Lancement des threads
     for (unsigned int i = 0; i < nbThreads; i++){
@@ -57,7 +54,7 @@ std::vector<int> ThreadManager::startSorting(
         if (i == nbThreads - 1) {
             endIdx = totalPerm - 1;
         }
-        PcoThread* thread = new PcoThread(bogosort, seq, this, startIdx, endIdx, &seqSorting);
+        PcoThread* thread = new PcoThread(bogosort, seq, this, startIdx, endIdx, &seqSorting, totalPerm);
         threads.push_back(thread);
     }
 
