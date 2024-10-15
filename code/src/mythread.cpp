@@ -10,11 +10,14 @@
  * @param endIdx index de fin de la séquence à trier
  * @param sortedSeq séquence triée
  */
-void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int>* sortedSeq, unsigned totalPerm)
+void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, unsigned endIdx, std::vector<int> *sortedSeq, unsigned totalPerm)
 {
     for (unsigned i = startIdx; i <= endIdx; ++i)
     {
         std::vector<int> perm = getPermutation(seq, i);
+
+        // Mise à jour de la progression
+        pManager->incrementPercentComputed(1.0 / totalPerm);
 
         // Si c'est trié, mettre à jour la séquence et terminé
         if (std::is_sorted(perm.begin(), perm.end()))
@@ -29,14 +32,11 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
         {
             break;
         }
-        // Mise à jour de la progression
-        pManager->incrementPercentComputed(1.0 / totalPerm);
     }
 
     // Exemple de mise à jour de la barre de progression
-    //pManager->incrementPercentComputed((double)1);
+    // pManager->incrementPercentComputed((double)1);
 }
-
 
 /**
  * @brief getPermutation Retourne la k-ième permutation d'une liste
@@ -51,7 +51,8 @@ std::vector<int> getPermutation(std::vector<int> list, int k)
     std::vector<int> availableElements = list;
 
     // Vérification si l'indice k est hors des plages
-    if (k >= factorial(n)) {
+    if (k >= factorial(n))
+    {
         throw std::out_of_range("k est out of range");
     }
 
@@ -66,7 +67,6 @@ std::vector<int> getPermutation(std::vector<int> list, int k)
 
     return permutation;
 }
-
 
 /**
  * @brief factorial Calcule la factorielle d'un entier
