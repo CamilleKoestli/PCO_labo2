@@ -7,7 +7,6 @@ Ce logiciel implémente l'algorithme Bogosort déterministe. Il s'agit d'un algo
 
 Dans le logiciel, nous pouvons définir le nombre de threads à utiliser, le seed ainsi que la longueur de la séquence.
 
-
 ## Choix d'implémentation
 ### Décomposition du travail des threads
 Pour réaliser ce laboratoire, j'ai choisi de diviser le nombre total de permutations de la séquence entre plusieurs threads. Chaque thread prend en charge un intervalle de permutations et vérifie si l'une des permutations de son intervalle est triée. Dès qu'un thread trouve une permutation triée, il met à jour une variable partagée `finished` pour indiquer aux autres threads de s'arrêter.
@@ -30,6 +29,11 @@ L'algorithme est implémenté dans la fonction `bogosort`. La fonction va devoir
   - Si oui, mettre à jour la séquence triée.
   - Si non, continuer à traiter les permutations suivantes dans son intervalle.
 
+### Concurrence
+Après considération des variables partagées, voici les variables qui pourraient poser problème :
+- `pManager.finished` : accès seulement en lecture par tous les thread. L'accès en écriture se fera seulement si un thread trouve la séquence triée.
+- `*sortedSeq` : normalement, le seul thread qui écrit dedans est le thread avec la séquence triée. Le cas limite est si la séquence possède plusieurs fois les mêmes nombres, mais comme la séquence triée sera la même entre les threads, ça ne devrait pas poser problème. 
+
 ## Tests effectués
 
 | Longueur | Threads | Objectif                                                                     |
@@ -37,13 +41,14 @@ L'algorithme est implémenté dans la fonction `bogosort`. La fonction va devoir
 | 3        | 1       | Tester l'algorithme bogosort déterministe                                    |
 | 6        | 9       | Tester l'algorithme bogosort déterministe plus complexe                      |
 | 10       | 800     | Tester capacité du programme avec beaucoup de threads et une grande séquence |
-| 10       | 4       | Tester capacité du programme avec beaucoup de threads                        |
+| 10       | 4       | Tester capacité du programme avec une grande séquence                        |
 | 3        | 10      | Tester le programme lorsqu'il y a plus de threads que de permutations        |
 | 7        | 13      | Tester la répartition inégale des permutations                               |
 
 ### Log de tests
 
 **Test avec 3 éléments générés aléatoirement et 10 threads**
+Il n'y a que 6 threads qui démarre vu qu'on en a besoin que de 6 sur les 10.
 
   ```
   Lancement threads 0 nombre permutation 1
@@ -61,6 +66,7 @@ L'algorithme est implémenté dans la fonction `bogosort`. La fonction va devoir
   ```
 
 **Test avec 7 éléments générés aléatoirement et 13 threads (total non divisible)**
+Le dernier thread récupère toutes les dernières permutations : 5039 - 4466 = 395. Il aura dont 395 permutation alors que les autres en ont 387.
 
 ```
 Lancement threads 0 nombre permutation 387
@@ -88,5 +94,5 @@ startIdx 3870 endIdx 4256
 Lancement threads 11 nombre permutation 387
 startIdx 4257 endIdx 4643
 Lancement threads 12 nombre permutation 387
-startIdx 4644 endIdx 5030
+startIdx 4644 endIdx 5039
 ```

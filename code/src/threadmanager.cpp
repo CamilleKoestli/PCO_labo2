@@ -58,12 +58,14 @@ std::vector<int> ThreadManager::startSorting(
         unsigned startIdx = i * permsPerThread;
         unsigned endIdx = (i + 1) * permsPerThread - 1;
 
-        std::cout << "startIdx " << startIdx << " endIdx " << endIdx << std::endl;
         
         // Si c'est le dernier thread, il prend les permutations restantes
         if (i == nbThreads - 1) {
             endIdx = totalPerm - 1;
         }
+        
+        std::cout << "startIdx " << startIdx << " endIdx " << endIdx << std::endl;
+
         PcoThread* thread = new PcoThread(bogosort, seq, this, startIdx, endIdx, &seqSorting, totalPerm);
         threads.push_back(thread);
     }
