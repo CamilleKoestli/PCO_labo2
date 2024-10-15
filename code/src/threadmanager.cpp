@@ -41,7 +41,10 @@ std::vector<int> ThreadManager::startSorting(
     unsigned totalPerm = factorial(seq.size());
     
     // Calcul le nombre de permutations par thread
-    unsigned permsPerThread = ceil((double)totalPerm / (double)nbThreads);
+    unsigned permsPerThread = floor((double)totalPerm / (double)nbThreads);
+    
+    // Calcul du nombre de permutations restantes
+    //unsigned remainingPerms = totalPerm % nbThreads;
     
 
     // Lancement des threads
