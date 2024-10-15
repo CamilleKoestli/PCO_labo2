@@ -24,13 +24,13 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
         {
             pManager->finished = true;
             *sortedSeq = perm;
-            break;
+            return;
         }
 
         // Vérifie si un autre thread a terminé
         if (pManager->finished)
         {
-            break;
+            return;
         }
     }
 }
