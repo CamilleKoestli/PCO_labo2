@@ -60,6 +60,20 @@ L'algorithme est implémenté dans la fonction `bogosort`. La fonction va devoir
 - Description : Utilisation d'une séquence de 3 éléments générée aléatoirement, ce qui donne un total de 3! = 6 permutations, avec 10 threads initialisés. Il y a moins de permutations que de threads, certains threads n'ont pas été démarrés.
 - Objectif : Tester le programme lorsqu'il y a plus de threads que de permutations.
 - Résultat : OK.
+  ```
+  Lancement threads 0 nombre permutation 1
+startIdx 0 endIdx 0
+Lancement threads 1 nombre permutation 1
+startIdx 1 endIdx 1
+Lancement threads 2 nombre permutation 1
+startIdx 2 endIdx 2
+Lancement threads 3 nombre permutation 1
+startIdx 3 endIdx 3
+Lancement threads 4 nombre permutation 1
+startIdx 4 endIdx 4
+Lancement threads 5 nombre permutation 1
+startIdx 5 endIdx 5
+  ```
 
 **Test avec 7 éléments générés aléatoirement et 13 threads (total non divisible)**
 

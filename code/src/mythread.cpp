@@ -33,9 +33,6 @@ void bogosort(std::vector<int> seq, ThreadManager *pManager, unsigned startIdx, 
             break;
         }
     }
-
-    // Exemple de mise à jour de la barre de progression
-    // pManager->incrementPercentComputed((double)1);
 }
 
 /**
